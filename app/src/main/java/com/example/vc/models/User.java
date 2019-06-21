@@ -5,6 +5,12 @@ public class User {
 
     private String id ,email, name , token;
 
+
+    public User(String id, String token) {
+        this.id = id;
+        this.token = token;
+    }
+
     public User(String id, String email, String name, String token) {
         this.id = id;
         this.email = email;

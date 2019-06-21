@@ -7,13 +7,17 @@ import com.example.vc.models.User;
 
 public class SharedPrefManager {
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     private static final String SHARED_PREF_NAME = "my_shared_preff";
     private static SharedPrefManager mInstance;
     private Context mCtx;
 
     private SharedPrefManager(Context mCtx) {
-
         this.mCtx = mCtx;
+        sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     public static synchronized SharedPrefManager getInstance(Context mCtx) {
@@ -25,17 +29,19 @@ public class SharedPrefManager {
     }
 
     public void saveUser(User user) {
-
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("id", user.getId());
-        editor.putString("email", user.getEmail());
-        editor.putString("name", user.getName());
+        //editor.putString("email", user.getEmail());
+        //editor.putString("name", user.getName());
         editor.putString("token", user.getToken());
 
         editor.apply();
     }
 
+    public void setLogingStatus(boolean b)
+    {
+        editor.putBoolean(" login ",b);
+        editor.commit();
+    }
 
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -3,13 +3,13 @@ package com.example.vc.models;
 public class LoginResponse {
 
     private String token, ID, message;
-    private User user;
 
-    public LoginResponse(String token, String ID, String message, User user) {
+
+
+    public LoginResponse(String token, String ID, String message) {
         this.token = token;
         this.ID = ID;
         this.message = message;
-        this.user = user;
     }
 
     public String getToken() {
@@ -36,11 +36,4 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

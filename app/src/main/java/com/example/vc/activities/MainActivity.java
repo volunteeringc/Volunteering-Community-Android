@@ -2,7 +2,12 @@ package com.example.vc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vc.R;
@@ -10,6 +15,8 @@ import com.example.vc.models.User;
 import com.example.vc.storage.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     private TextView textView;
 
@@ -19,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
     }
 
-    @Override
+
+
+        @Override
     protected void onStart() {
         super.onStart();
         if (!SharedPrefManager.getInstance(this).isLoggedIn()) {

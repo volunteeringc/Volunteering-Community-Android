@@ -3,6 +3,7 @@ package com.example.vc.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "LoginActivity";
 
     private ProgressBar loginProgress;
     private Button loginBtn;
@@ -94,8 +96,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 LoginResponse loginResponse = response.body();
                 if (response.code() == 200) {
+                   // Log.d(TAG, "onResponse: "+loginResponse.getID() + loginResponse.getToken());
                     SharedPrefManager.getInstance(LoginActivity.this)
-                            .saveUser(loginResponse.getUser());
+                            .saveUser(new User(loginResponse.getID(),loginResponse.getToken()));
+                    SharedPrefManager.getInstance(LoginActivity.this).setLogingStatus(true);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
