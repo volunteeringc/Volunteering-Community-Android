@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.vc.API.RetrofitClient;
 import com.example.vc.R;
-import com.example.vc.models.DefaultResponse;
 import com.example.vc.models.LoginResponse;
 import com.example.vc.models.User;
 import com.example.vc.storage.SharedPrefManager;
@@ -46,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 
@@ -100,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     SharedPrefManager.getInstance(LoginActivity.this)
                             .saveUser(new User(loginResponse.getID(),loginResponse.getToken()));
                     SharedPrefManager.getInstance(LoginActivity.this).setLogingStatus(true);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else if (response.code() == 500) {
