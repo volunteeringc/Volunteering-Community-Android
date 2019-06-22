@@ -1,5 +1,7 @@
 package com.example.vc.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,8 +15,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.vc.Fragments.EventsFragment;
+import com.example.vc.Fragments.ProfileFragment;
+import com.example.vc.Fragments.SettingsFragment;
 import com.example.vc.R;
+import com.example.vc.storage.SharedPrefManager;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,17 +89,40 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            getSupportActionBar().setTitle("Home");
         } else if (id == R.id.nav_profile) {
+            getSupportActionBar().setTitle("Profile");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
 
-        } else if (id == R.id.nav_Settings) {
+        } else if (id == R.id.nav_event) {
+
+            getSupportActionBar().setTitle("Events");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new EventsFragment()).commit();
+
+        } else if (id == R.id.nav_settings) {
+            getSupportActionBar().setTitle("Settings");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
 
         } else if (id == R.id.nav_LogOut) {
-
+            //    SharedPrefManager.getInstance().clear();
+            //  Intent intent = new Intent(, LoginActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
+//    public void updateNavHeader() {
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        View headerView = navigationView.getHeaderView(0);
+//        TextView naveUsername = headerView.findViewById(R.id.nav_username);
+//        TextView naveUserEmail = headerView.findViewById(R.id.nav_user_email);
+//
+//
+//        naveUserEmail.setText(currentUser.getEmail());
+//        naveUsername.setText(currentUser.getDisplayName());
+
+    }
