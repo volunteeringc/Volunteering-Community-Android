@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vc.Fragments.EventsFragment;
+import com.example.vc.Fragments.HomeFragment;
 import com.example.vc.Fragments.ProfileFragment;
 import com.example.vc.Fragments.SettingsFragment;
 import com.example.vc.R;
@@ -90,6 +91,7 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             getSupportActionBar().setTitle("Home");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
         } else if (id == R.id.nav_profile) {
             getSupportActionBar().setTitle("Profile");
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
