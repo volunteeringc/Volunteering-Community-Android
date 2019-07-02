@@ -9,7 +9,7 @@ In this context, we are happy to introduce Volunteer, which is only an aid to ch
 helps keep businesses and other organizations afloat.
 
 • Volunteer plays a crucial role in enabling individuals to promote effective citizenship and
-to build inclusive and flexible societies in which everyone can thrive. By:
+to build inclusive and flexible societies in which everyone can thrive.
 
 • An interactive interface can be accessed to interact with the organization, the user can
 access the Volunteer from his mobile phone or from the web application via the
