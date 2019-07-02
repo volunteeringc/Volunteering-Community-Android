@@ -2,6 +2,8 @@ package com.example.vc.models;
 
 
 public class ProfileResponse {
+    public ProfileResponse() {
+    }
 
     private String name, id;
     private String post[], event[], following[], followers[];

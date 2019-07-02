@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if (password.length() < 6) {
 
-            editTextPassword.setError("Password should be 8 character long");
+            editTextPassword.setError("Password should be 6 character long");
             editTextPassword.requestFocus();
             return;
 
@@ -95,9 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 LoginResponse loginResponse = response.body();
                 if (response.code() == 200) {
-                   // Log.d(TAG, "onResponse: "+loginResponse.getID() + loginResponse.getToken());
                     SharedPrefManager.getInstance(LoginActivity.this)
-                            .saveUser(new User(loginResponse.getID(),loginResponse.getToken()));
+                            .saveUser(new User(loginResponse.getID(), loginResponse.getToken()));
                     SharedPrefManager.getInstance(LoginActivity.this).setLogingStatus(true);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

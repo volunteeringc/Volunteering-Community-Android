@@ -30,16 +30,13 @@ public class SharedPrefManager {
 
     public void saveUser(User user) {
         editor.putString("id", user.getId());
-        //editor.putString("email", user.getEmail());
-        //editor.putString("name", user.getName());
         editor.putString("token", user.getToken());
 
         editor.apply();
     }
 
-    public void setLogingStatus(boolean b)
-    {
-        editor.putBoolean(" login ",b);
+    public void setLogingStatus(boolean b) {
+        editor.putBoolean(" login ", b);
         editor.commit();
     }
 

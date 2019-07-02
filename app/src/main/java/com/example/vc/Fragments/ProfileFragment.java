@@ -1,28 +1,54 @@
 package com.example.vc.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.ArrayMap;
+import android.support.v4.view.ViewPager;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.vc.API.RetrofitClient;
+import com.example.vc.Constants.Constnts;
 import com.example.vc.R;
+import com.example.vc.activities.HomeActivity;
+import com.example.vc.activities.LoginActivity;
+import com.example.vc.adapters.ProfileViewPagerAdapter;
+import com.example.vc.models.LoginResponse;
+import com.example.vc.models.ProfileResponse;
+import com.example.vc.models.User;
+import com.example.vc.storage.SharedPrefManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private TabLayout tabLayout;
+    private AppBarLayout appBarLayout;
+    private ViewPager viewPager;
+    View view;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -34,14 +60,7 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
@@ -55,14 +74,31 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+        tabLayout = view.findViewById(R.id.tabLayout);
+        appBarLayout = view.findViewById(R.id.appBar);
+        viewPager = view.findViewById(R.id.viewPager);
+
+        profileReqest();
+        //initFollowingFollowersFragment();
+
+        return view;
+    }
+
+    private void initFollowingFollowersFragment(ProfileResponse profileResponse) {
+        ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(getFragmentManager());
+        adapter.AddFragment(FollowingFragment.newInstance(profileResponse.getFollowing()), "Following");
+        adapter.AddFragment(FollowersFragment.newInstance(profileResponse.getFollowers()), "Followers");
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -81,18 +117,49 @@ public class ProfileFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
+    private void profileReqest() {
+
+        User user  = SharedPrefManager.getInstance(getActivity()).getUser();
+        String id = user.getId();
+        String token = user.getToken();
+
+//        final JSONObject jsonBody = new JSONObject();
+//        try {
+//
+//            jsonBody.put("id", id);
+//
+//        } catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(jsonBody).toString());
+
+        Call<ProfileResponse> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .profile(id, Constnts.getInstance().auth.concat(token));
+        call.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                if (response.isSuccessful())
+                {}
+                else {
+                    Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+   }
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
