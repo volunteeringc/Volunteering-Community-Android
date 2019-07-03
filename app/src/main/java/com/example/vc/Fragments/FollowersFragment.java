@@ -55,34 +55,4 @@ public class FollowersFragment extends Fragment {
 
     }
 }
-//    private void Followers() {
-//        User user = SharedPrefManager.getInstance(getActivity()).getUser();
-//        String id = user.getId();
-//        String token = user.getToken();
-//
-//
-//        Call<FollowersResponse> call = RetrofitClient
-//                .getInstance()
-//                .getApi()
-//                .followers(id, Constnts.getInstance().auth.concat(token));
-//        call.enqueue(new Callback<FollowersResponse>() {
-//            @Override
-//            public void onResponse(Call<FollowersResponse> call, Response<FollowersResponse> response) {
-//
-//                if (response.isSuccessful()) {
-//                } else {
-//                    Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<FollowersResponse> call, Throwable t) {
-//
-//                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-
-
 
