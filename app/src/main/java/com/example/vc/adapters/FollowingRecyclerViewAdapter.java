@@ -14,30 +14,30 @@ import com.example.vc.models.FollowingResponse;
 
 import java.util.List;
 
-public class FollowingRecyclerViewAdaptor extends RecyclerView.Adapter<FollowingRecyclerViewAdaptor.MyViewHolder> {
+public class FollowingRecyclerViewAdapter extends RecyclerView.Adapter<FollowingRecyclerViewAdapter.MyViewHolder> {
 
 
     Context mContext;
     List<FollowingResponse> mData;
 
-    public FollowingRecyclerViewAdaptor(Context mContext, List<FollowingResponse> mData) {
+    public FollowingRecyclerViewAdapter(Context mContext, List<FollowingResponse> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
 
     @NonNull
     @Override
-    public FollowingRecyclerViewAdaptor.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public FollowingRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_following, viewGroup, false);
 
-        FollowingRecyclerViewAdaptor.MyViewHolder vHolder = new FollowingRecyclerViewAdaptor.MyViewHolder(v);
+        FollowingRecyclerViewAdapter.MyViewHolder vHolder = new FollowingRecyclerViewAdapter.MyViewHolder(v);
 
         return vHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FollowingRecyclerViewAdaptor.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull FollowingRecyclerViewAdapter.MyViewHolder myViewHolder, int i) {
 
         myViewHolder.name.setText(mData.get(i).getFollowing().length);
 

@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vc.R;
-import com.example.vc.adapters.FollowingRecyclerViewAdaptor;
+import com.example.vc.adapters.FollowingRecyclerViewAdapter;
 import com.example.vc.models.FollowingResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,9 +47,9 @@ public class FollowingFragment extends Fragment {
         }
 
         myRecyclerView = (RecyclerView) view.findViewById(R.id.following_recyclerView);
-        FollowingRecyclerViewAdaptor followingRecyclerViewAdaptor = new FollowingRecyclerViewAdaptor(getContext(),listFollowing);
+        FollowingRecyclerViewAdapter followingRecyclerViewAdapter = new FollowingRecyclerViewAdapter(getContext(),listFollowing);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myRecyclerView.setAdapter(followingRecyclerViewAdaptor);
+        myRecyclerView.setAdapter(followingRecyclerViewAdapter);
 
 
         return view;

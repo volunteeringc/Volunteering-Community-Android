@@ -9,22 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.vc.API.RetrofitClient;
-import com.example.vc.Constants.Constnts;
 import com.example.vc.R;
-import com.example.vc.adapters.FollowersRecyclerViewAdaoter;
+import com.example.vc.adapters.FollowersRecyclerViewAdapter;
 import com.example.vc.models.FollowersResponse;
-import com.example.vc.models.User;
-import com.example.vc.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FollowersFragment extends Fragment {
 
@@ -51,9 +42,9 @@ public class FollowersFragment extends Fragment {
             data = getArguments().getStringArray("data");
         }
         myRecyclerView = (RecyclerView) view.findViewById(R.id.followers_recyclerView);
-        FollowersRecyclerViewAdaoter followersRecyclerViewAdaoter = new FollowersRecyclerViewAdaoter(getContext(),listFollowers);
+        FollowersRecyclerViewAdapter followersRecyclerViewAdapter = new FollowersRecyclerViewAdapter(getContext(),listFollowers);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myRecyclerView.setAdapter(followersRecyclerViewAdaoter);
+        myRecyclerView.setAdapter(followersRecyclerViewAdapter);
         return view;
     }
 

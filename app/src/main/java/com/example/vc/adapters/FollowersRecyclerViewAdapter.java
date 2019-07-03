@@ -14,12 +14,12 @@ import com.example.vc.models.FollowersResponse;
 
 import java.util.List;
 
-public class FollowersRecyclerViewAdaoter extends RecyclerView.Adapter<FollowersRecyclerViewAdaoter.MyViewHolder> {
+public class FollowersRecyclerViewAdapter extends RecyclerView.Adapter<FollowersRecyclerViewAdapter.MyViewHolder> {
 
     Context mContext;
     List<FollowersResponse> mData;
 
-    public FollowersRecyclerViewAdaoter(Context mContext, List<FollowersResponse> mData) {
+    public FollowersRecyclerViewAdapter(Context mContext, List<FollowersResponse> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
