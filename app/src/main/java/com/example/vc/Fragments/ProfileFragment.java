@@ -1,15 +1,12 @@
 package com.example.vc.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.ArrayMap;
 import android.support.v4.view.ViewPager;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +15,11 @@ import android.widget.Toast;
 import com.example.vc.API.RetrofitClient;
 import com.example.vc.Constants.Constnts;
 import com.example.vc.R;
-import com.example.vc.activities.HomeActivity;
-import com.example.vc.activities.LoginActivity;
 import com.example.vc.adapters.ProfileViewPagerAdapter;
-import com.example.vc.models.LoginResponse;
 import com.example.vc.models.ProfileResponse;
 import com.example.vc.models.User;
 import com.example.vc.storage.SharedPrefManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,7 +74,7 @@ public class ProfileFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
 
         profileReqest();
-        //initFollowingFollowersFragment();
+        initFollowingFollowersFragment(new ProfileResponse());
 
         return view;
     }
@@ -123,19 +110,9 @@ public class ProfileFragment extends Fragment {
 
     private void profileReqest() {
 
-        User user  = SharedPrefManager.getInstance(getActivity()).getUser();
+        User user = SharedPrefManager.getInstance(getActivity()).getUser();
         String id = user.getId();
         String token = user.getToken();
-
-//        final JSONObject jsonBody = new JSONObject();
-//        try {
-//
-//            jsonBody.put("id", id);
-//
-//        } catch (JSONException e){
-//            e.printStackTrace();
-//        }
-//        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(jsonBody).toString());
 
         Call<ProfileResponse> call = RetrofitClient
                 .getInstance()
@@ -144,9 +121,8 @@ public class ProfileFragment extends Fragment {
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                if (response.isSuccessful())
-                {}
-                else {
+                if (response.isSuccessful()) {
+                } else {
                     Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -157,7 +133,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-   }
+    }
 
 
     public interface OnFragmentInteractionListener {
