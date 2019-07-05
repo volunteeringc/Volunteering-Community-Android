@@ -3,7 +3,7 @@ package com.example.vc.models;
 public class User {
 
 
-    private String id ,email, name , token;
+    private String id ,email, name , token, password;
 
 
     public User(String id, String token) {
@@ -11,11 +11,13 @@ public class User {
         this.token = token;
     }
 
-    public User(String id, String email, String name, String token) {
+
+    public User(String id, String email, String name, String token, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.token = token;
+        this.password = password;
     }
 
     public String getId() {
@@ -26,7 +28,7 @@ public class User {
         this.id = id;
     }
 
-    public  String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -48,5 +50,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

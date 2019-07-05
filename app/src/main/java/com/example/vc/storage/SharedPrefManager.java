@@ -51,7 +51,8 @@ public class SharedPrefManager {
                 sharedPreferences.getString("id", ""),
                 sharedPreferences.getString("email", ""),
                 sharedPreferences.getString("name", ""),
-                sharedPreferences.getString("token", "")
+                sharedPreferences.getString("token", ""),
+                sharedPreferences.getString("password", "")
         );
     }
 

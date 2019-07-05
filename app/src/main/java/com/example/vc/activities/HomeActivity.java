@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,10 +24,10 @@ import com.example.vc.Fragments.HomeFragment;
 import com.example.vc.Fragments.ProfileFragment;
 import com.example.vc.Fragments.SettingsFragment;
 import com.example.vc.R;
+import com.example.vc.models.User;
 import com.example.vc.storage.SharedPrefManager;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +107,11 @@ public class HomeActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
 
         } else if (id == R.id.nav_LogOut) {
-            //    SharedPrefManager.getInstance().clear();
-            //  Intent intent = new Intent(, LoginActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //startActivity(intent);
+            SharedPrefManager.getInstance(this).clear();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -124,7 +126,7 @@ public class HomeActivity extends AppCompatActivity
 //        TextView naveUserEmail = headerView.findViewById(R.id.nav_user_email);
 //
 //
-//        naveUserEmail.setText(currentUser.getEmail());
+//        naveUserEmail.setText();
 //        naveUsername.setText(currentUser.getDisplayName());
 
-    }
+}

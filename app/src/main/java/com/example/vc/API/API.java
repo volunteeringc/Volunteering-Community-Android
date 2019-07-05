@@ -8,11 +8,15 @@ import com.example.vc.models.LoginResponse;
 import com.example.vc.models.ProfileResponse;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface API {
@@ -47,4 +51,21 @@ public interface API {
     home(@Query("id") String id, @Header("Authorization") String header);
 
 
+    @FormUrlEncoded
+    @PUT("setting/changename")
+    Call<ProfileResponse> changename(
+            @Field("id") String id, @Field("name") String name, @Header("Authorization") String header);
+
+    @FormUrlEncoded
+    @PUT("setting/changepassword")
+    Call<ProfileResponse>
+    ChangePassword(@Field("id") String id, @Field("password") String password, @Header("Authorization") String header);
+
+
+
+//    @DELETE("setting/delete")
+//    Call<ProfileResponse> delete(@Path("id") String id, @Header("Authorization") String header);
+
+
 }
+

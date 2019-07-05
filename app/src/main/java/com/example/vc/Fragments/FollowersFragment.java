@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vc.R;
+import com.example.vc.adapters.ProfileViewPagerAdapter;
+import com.example.vc.models.ProfileResponse;
 
 
 public class FollowersFragment extends Fragment {
@@ -33,6 +35,8 @@ public class FollowersFragment extends Fragment {
         if (getArguments() != null) {
             data = getArguments().getStringArray("data");
         }
+
+
         return view;
     }
 

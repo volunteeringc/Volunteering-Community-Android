@@ -23,6 +23,12 @@
     <color name="dark_grey">#696969</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="colorPrimary1">#21a7ed</color>
+    <color name="colorPrimaryDark1">#0a5b85</color>
+    <color name="colorPrimaryBackground">#0886c7</color>
+    <color name="colorAccent1">#375290</color>
+    <color name="colorFormBackground">#e4e4e4</color>
+
 
 
 </resources>
