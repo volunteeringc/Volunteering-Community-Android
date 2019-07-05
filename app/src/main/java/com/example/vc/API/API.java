@@ -13,13 +13,13 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface API {
+    //User Routes
+
 
     @FormUrlEncoded
     @POST("signup")
@@ -34,22 +34,8 @@ public interface API {
     login(@Field("email") String email,
           @Field("password") String password);
 
-    @GET("profile")
-    Call<ProfileResponse>
-    profile(@Query("id") String id, @Header("Authorization") String header);
-
-    @GET("followers")
-    Call<FollowersResponse>
-    followers(@Query("id") String id, @Header("Authorization") String header);
-
-    @GET("following")
-    Call<FollowingResponse>
-    following(@Query("id") String id, @Header("Authorization") String header);
-
-    @GET("home")
-    Call<HomeResponse>
-    home(@Query("id") String id, @Header("Authorization") String header);
-
+    @DELETE("setting/delete")
+    Call<DefaultResponse> delete(@Query("id") String id, @Header("Authorization") String header);
 
     @FormUrlEncoded
     @PUT("setting/changename")
@@ -62,9 +48,25 @@ public interface API {
     ChangePassword(@Field("id") String id, @Field("password") String password, @Header("Authorization") String header);
 
 
+    @GET("profile")
+    Call<ProfileResponse>
+    profile(@Query("id") String id, @Header("Authorization") String header);
 
-//    @DELETE("setting/delete")
-//    Call<ProfileResponse> delete(@Path("id") String id, @Header("Authorization") String header);
+
+    @GET("followers")
+    Call<FollowersResponse>
+    followers(@Query("id") String id, @Header("Authorization") String header);
+
+
+    @GET("following")
+    Call<FollowingResponse>
+    following(@Query("id") String id, @Header("Authorization") String header);
+
+    //Home Routes
+
+    @GET("home")
+    Call<HomeResponse>
+    home(@Query("id") String id, @Header("Authorization") String header);
 
 
 }

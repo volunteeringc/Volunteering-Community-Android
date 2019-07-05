@@ -31,7 +31,8 @@ public class SharedPrefManager {
     public void saveUser(User user) {
         editor.putString("id", user.getId());
         editor.putString("token", user.getToken());
-
+        editor.putString("name",user.getName());
+        editor.putString("email",user.getEmail());
         editor.apply();
     }
 

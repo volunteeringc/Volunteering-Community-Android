@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vc.API.RetrofitClient;
@@ -31,10 +33,14 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView profileName;
+    private ImageView profileImg;
+
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
     View view;
+
 
 
     // TODO: Rename and change types of parameters
@@ -67,6 +73,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+
 
 
         tabLayout = view.findViewById(R.id.tabLayout);

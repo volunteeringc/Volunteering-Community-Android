@@ -11,7 +11,6 @@ public class User {
         this.token = token;
     }
 
-
     public User(String id, String email, String name, String token, String password) {
         this.id = id;
         this.email = email;

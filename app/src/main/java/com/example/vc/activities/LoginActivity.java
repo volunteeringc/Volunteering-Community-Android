@@ -38,7 +38,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.creatAccount).setOnClickListener(this);
         editTextEmail = findViewById(R.id.login_email);
         editTextPassword = findViewById(R.id.login_password);
-
+//        loginProgress = findViewById(R.id.login_progressBar);
+//
+//        loginProgress.setVisibility(View.INVISIBLE);
+//        loginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                loginProgress.setVisibility(View.VISIBLE);
+//                loginBtn.setVisibility(View.INVISIBLE);
+//
+//                final String mail = editTextEmail.getText().toString();
+//                final String password = editTextPassword.getText().toString();
+//
+//                if (mail.isEmpty() || password.isEmpty()) {
+//                    editTextEmail.setError("Please Complete all fields");
+//                    editTextPassword.setError("Please Complete all fields");
+//                    loginBtn.setVisibility(View.VISIBLE);
+//                    loginProgress.setVisibility(View.INVISIBLE);
+//                } else {
+//                    userLogin();
+//                }
+//
+//
+//            }
+//        });
     }
 
     @Override
@@ -121,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (v.getId()) {
             case R.id.loginBtn:
+
                 userLogin();
                 break;
             case R.id.creatAccount:

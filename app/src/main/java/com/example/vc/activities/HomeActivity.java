@@ -29,20 +29,23 @@ import com.example.vc.storage.SharedPrefManager;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+      //  FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+//        updateNavHeader();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,6 +53,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+
     }
 
     @Override
@@ -118,15 +124,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//    public void updateNavHeader() {
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        View headerView = navigationView.getHeaderView(0);
-//        TextView naveUsername = headerView.findViewById(R.id.nav_username);
-//        TextView naveUserEmail = headerView.findViewById(R.id.nav_user_email);
-//
-//
-//        naveUserEmail.setText();
-//        naveUsername.setText(currentUser.getDisplayName());
 
+    public void updateNavHeader() {
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView naveUsername = headerView.findViewById(R.id.nav_username);
+        TextView naveUserEmail = headerView.findViewById(R.id.nav_user_email);
+
+
+        naveUserEmail.setText(user.getEmail());
+        naveUsername.setText(user.getName());
+
+    }
 }

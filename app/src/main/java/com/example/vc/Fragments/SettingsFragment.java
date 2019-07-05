@@ -1,6 +1,9 @@
 package com.example.vc.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +18,8 @@ import android.widget.Toast;
 import com.example.vc.API.RetrofitClient;
 import com.example.vc.Constants.Constnts;
 import com.example.vc.R;
+import com.example.vc.activities.SignUpActivity;
+import com.example.vc.models.DefaultResponse;
 import com.example.vc.models.ProfileResponse;
 import com.example.vc.models.User;
 import com.example.vc.storage.SharedPrefManager;
@@ -196,53 +201,53 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-//    private void deleteUser() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setTitle("Are you sure?");
-//        builder.setMessage("This action is irreversible...");
-//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                User user = SharedPrefManager.getInstance(getActivity()).getUser();
-//                String id = user.getId();
-//                String token = user.getToken();
-//
-//                Call<ProfileResponse> call = RetrofitClient.getInstance().getApi()
-//                        .delete(id,Constnts.getInstance().auth.concat(token));
-//
-//                call.enqueue(new Callback<ProfileResponse>() {
-//                    @Override
-//                    public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-//
-//                        if (!response.body().isErr()) {
-//                            SharedPrefManager.getInstance(getActivity()).clear();
-//                            SharedPrefManager.getInstance(getActivity()).clear();
-//                            Intent intent = new Intent(getActivity(), SignUpActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            startActivity(intent);
-//                        }
-//
-//                        Toast.makeText(getActivity(), response.message(), Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ProfileResponse> call, Throwable t) {
-//
-//                    }
-//                });
-//
-//            }
-//        });
-//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-//
-//        AlertDialog ad = builder.create();
-//        ad.show();
-//    }
+    private void deleteUser() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Are you sure?");
+        builder.setMessage("This action is irreversible...");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                User user = SharedPrefManager.getInstance(getActivity()).getUser();
+                String id = user.getId();
+                String token = user.getToken();
+
+                Call<DefaultResponse> call = RetrofitClient.getInstance().getApi()
+                        .delete(id,Constnts.getInstance().auth.concat(token));
+
+                call.enqueue(new Callback<DefaultResponse>() {
+                    @Override
+                    public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                        if (!response.body().isErr()) {
+                            SharedPrefManager.getInstance(getActivity()).clear();
+                            SharedPrefManager.getInstance(getActivity()).clear();
+                            Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+
+                        Toast.makeText(getActivity(), response.message(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<DefaultResponse> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        ad.show();
+    }
 
 
     @Override
@@ -255,9 +260,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             case R.id.buttonChangePassword:
                 ChangePassword();
                 break;
-//            case R.id.buttonDelete:
-//                deleteUser();
-//                break;
+            case R.id.buttonDelete:
+                deleteUser();
+                break;
         }
 
     }
